@@ -20,9 +20,9 @@ import java.util.Properties;
 @ComponentScan(value = "web")
 public class AppConfig {
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
+    @Autowired
     public AppConfig(Environment env) {
         this.env = env;
     }
@@ -56,7 +56,7 @@ public class AppConfig {
         props.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         return props;
     }
-    
+
     @Bean
     public JpaTransactionManager getTransactionManager() {
         JpaTransactionManager tm = new JpaTransactionManager();

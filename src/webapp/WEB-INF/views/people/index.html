@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All users</title>
+</head>
+<body>
+<h2>User Management</h2>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="user : ${people}">
+        <td>
+            <a th:href="@{/people/show(id=${user.id})}" th:text="${user.name}">User Name</a>
+        </td>
+        <td th:text="${user.email}">user@example.com</td>
+        <td class="action-links">
+            <a th:href="@{/people/edit(id=${user.id})}">Edit</a>
+        </td>
+        <td class="action-links">
+            <form th:action="@{/people/delete}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <button type="submit"
+                        onclick="return confirm('Delete this user?')"
+                        style="background: none; border: none; color: #0066cc; cursor: pointer; padding: 0; text-decoration: underline;">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<br/>
+<a href="/people/new" class="create-btn">Create New User</a>
+</body>
+</html>
+
