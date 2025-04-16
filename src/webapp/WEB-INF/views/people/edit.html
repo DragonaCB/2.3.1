@@ -5,7 +5,7 @@
     <title>Update user</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/people/update}" th:object="${user}">
+<form th:method="POST" th:action="@{/update}" th:object="${user}">
     <input type="hidden" name="id" th:value="${user.id}"/>
 
     <label for="name">Enter name:</label>
@@ -19,6 +19,6 @@
     <input type="submit" value="Update User"/>
 </form>
 <br/>
-<a th:href="@{/people}">Back to list</a>
+<a th:href="@{/user}">Back to list</a>
 </body>
 </html>

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserDAO {
+public class UserDaoImpl {
     private static int UserID;
     private final List<User> users;
 
