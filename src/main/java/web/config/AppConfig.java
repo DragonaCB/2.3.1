@@ -53,7 +53,7 @@ public class AppConfig {
         props.put("hibernate.show_sql", "true");
         props.put("hibernate.format_sql", "true");
         props.put("hibernate.hbm2ddl.auto", "update");
-        props.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+        props.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         return props;
     }
 

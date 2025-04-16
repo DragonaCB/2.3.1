@@ -1,45 +1,49 @@
 package web.dao;
 
-import org.springframework.stereotype.Component;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import web.models.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class UserDaoImpl {
-    private static int UserID;
-    private final List<User> users;
+@Repository
+public class UserDaoImpl implements UserDao {
 
-    {
-        users = new ArrayList<>();
-        users.add(new User(++UserID, "Tom", "tom@gmail.com"));
-        users.add(new User(++UserID, "Jane", "jane@gmail.com"));
-        users.add(new User(++UserID, "Jack", "jack@gmail.com"));
-        users.add(new User(++UserID, "Bob", "bob@gmail.com"));
-        users.add(new User(++UserID, "David", "david@gmail.com"));
+    @PersistenceContext
+    private EntityManager em;
+
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 
-    public List<User> index() {
-        return users;
+    @Transactional
+    public User findById(int id) {
+        return em.find(User.class, id);
     }
 
-    public User show(int id) {
-        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
-    }
-
+    @Transactional
     public void save(User user) {
-        user.setId(++UserID);
-        users.add(user);
+        em.persist(user);
     }
 
+    @Transactional
     public void update(int id, User updateUser) {
-        User updateToUpdate = show(id);
-        updateToUpdate.setName(updateUser.getName());
-        updateToUpdate.setEmail(updateUser.getEmail());
+        User updateToUpdate = em.find(User.class, id);
+        if (updateToUpdate != null) {
+            updateToUpdate.setName(updateUser.getName());
+            updateToUpdate.setEmail(updateUser.getEmail());
+            em.merge(updateToUpdate);
+        }
     }
 
+    @Transactional
     public void delete(int id) {
-        users.removeIf(user -> user.getId() == id);
+        User user = em.find(User.class, id);
+        if (user != null) {
+            em.remove(user);
+        }
     }
 }

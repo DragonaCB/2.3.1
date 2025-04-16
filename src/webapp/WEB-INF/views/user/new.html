@@ -2,12 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update user</title>
+    <title>New user</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/update}" th:object="${user}">
-    <input type="hidden" name="id" th:value="${user.id}"/>
-
+<form th:method="POST" th:action="@{/user}" th:object="${user}">
     <label for="name">Enter name:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
@@ -15,10 +13,7 @@
     <label for="email">Enter email:</label>
     <input type="text" th:field="*{email}" id="email"/>
     <br/>
-
-    <input type="submit" value="Update User"/>
+    <input type="submit" value="Create!"/>
 </form>
-<br/>
-<a th:href="@{/user}">Back to list</a>
 </body>
 </html>

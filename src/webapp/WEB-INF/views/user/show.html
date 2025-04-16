@@ -19,8 +19,8 @@
         <td th:text="${user.name}">-</td>
         <td th:text="${user.email}">-</td>
         <td>
-            <a th:href="@{/people/edit(id=${user.id})}">Edit</a> |
-            <form th:action="@{/people/delete}" method="post" style="display: inline;">
+            <a th:href="@{/user/edit(id=${user.id})}">Edit</a> |
+            <form th:action="@{/user/delete}" method="post" style="display: inline;">
                 <input type="hidden" name="id" th:value="${user.id}">
                 <button type="submit"
                         onclick="return confirm('Delete this user?')"

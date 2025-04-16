@@ -15,17 +15,17 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <tr th:each="user : ${people}">
+    <tr th:each="user : ${users}">
         <td th:text="${user.id}">-</td>
         <td>
-            <a th:href="@{/people/show(id=${user.id})}" th:text="${user.name}">User Name</a>
+            <a th:href="@{/user/show(id=${user.id})}" th:text="${user.name}">User Name</a>
         </td>
         <td th:text="${user.email}">user@example.com</td>
         <td class="action-links">
-            <a th:href="@{/people/edit(id=${user.id})}">Edit</a>
+            <a th:href="@{/user/edit(id=${user.id})}">Edit</a>
         </td>
         <td class="action-links">
-            <form th:action="@{/people/delete}" method="post" style="display: inline;">
+            <form th:action="@{/user/delete}" method="post" style="display: inline;">
                 <input type="hidden" name="id" th:value="${user.id}">
                 <button type="submit"
                         onclick="return confirm('Delete this user?')"
@@ -38,7 +38,7 @@
 </table>
 
 <br/>
-<a href="/people/new" class="create-btn">Create New User</a>
+<a href="/user/new" class="create-btn">Create New User</a>
 </body>
 </html>
 

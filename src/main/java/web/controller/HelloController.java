@@ -15,6 +15,6 @@ public class HelloController {
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
         model.addAttribute("messages", messages);
-        return "people/hello";
+        return "user/hello";
     }
 }
