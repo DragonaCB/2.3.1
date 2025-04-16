@@ -9,12 +9,14 @@
 
 <table border="1">
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     <tr th:each="user : ${people}">
+        <td th:text="${user.id}">-</td>
         <td>
             <a th:href="@{/people/show(id=${user.id})}" th:text="${user.name}">User Name</a>
         </td>
