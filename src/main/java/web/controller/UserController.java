@@ -19,44 +19,44 @@ public class UserController {
     }
 
     @GetMapping()
-    public String findAll(Model model) {
-        model.addAttribute("users", userService.findAll());
+    public String getAllUsers(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         return "user/index";
     }
 
     @GetMapping("/show")
-    public String show(@RequestParam("id") int id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+    public String getUserById(@RequestParam("id") int id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
         return "user/show";
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
+    public String getNewUserForm(Model model) {
         model.addAttribute("user", new User());
         return "user/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
-        userService.save(user);
+    public String createUser(@ModelAttribute("user") User user) {
+        userService.createUser(user);
         return "redirect:/user";
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam("id") int id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+    public String getEditUserForm(@RequestParam("id") int id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
         return "user/edit";
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute("user") User user) {
-        userService.update(user.getId(), user);
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user.getId(), user);
         return "redirect:/user";
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam("id") int id) {
-        userService.delete(id);
+    public String deleteUser(@RequestParam("id") int id) {
+        userService.deleteUser(id);
         return "redirect:/user";
     }
 }

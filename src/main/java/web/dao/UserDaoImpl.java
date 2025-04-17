@@ -9,28 +9,28 @@ import web.models.User;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements web.dao.UserDao {
 
     @PersistenceContext
     private EntityManager em;
 
-    @Transactional(readOnly = true)
-    public List<User> findAll() {
+    @Transactional
+    public List<User> getAllUsers() {
         return em.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Transactional
-    public User findById(int id) {
+    public User getUserById(int id) {
         return em.find(User.class, id);
     }
 
     @Transactional
-    public void save(User user) {
+    public void createUser(User user) {
         em.persist(user);
     }
 
     @Transactional
-    public void update(int id, User updateUser) {
+    public void updateUser(int id, User updateUser) {
         User updateToUpdate = em.find(User.class, id);
         if (updateToUpdate != null) {
             updateToUpdate.setName(updateUser.getName());
@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Transactional
-    public void delete(int id) {
+    public void deleteUser(int id) {
         User user = em.find(User.class, id);
         if (user != null) {
             em.remove(user);
